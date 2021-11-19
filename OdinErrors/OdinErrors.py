@@ -58,9 +58,9 @@ class OdinErrors(sublime_plugin.EventListener):
             lambda x: "-collection:" + x["name"] + "=" + x["path"],
             filter(
                 lambda x: x["name"] != "core" and x["name"] != "vendor", 
-                f["collections"]
+                f["collections"] if "collections" in f else [] 
             )
         )) + list(map(
             lambda x: "-define:" + x["name"] + "=" + x["value"],
-            f["defines"]
+            f["defines"] if "defines" in f else [] 
         ))
