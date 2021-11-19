@@ -3,6 +3,7 @@ import sublime, sublime_plugin
 import os
 import re
 import json
+import shutil
 import subprocess
 
 class OdinErrors(sublime_plugin.EventListener):
@@ -40,7 +41,7 @@ class OdinErrors(sublime_plugin.EventListener):
         return list(filter(
             lambda x: x.startswith(view.file_name()),
             subprocess.Popen(
-                ["odin", "check", os.path.dirname(view.file_name()), "-no-entry-point"] + args,
+                [shutil.which("odin"), "check", os.path.dirname(view.file_name()), "-no-entry-point"] + args,
                 stdout = subprocess.PIPE,
                 stderr = subprocess.STDOUT,
                 startupinfo = sinfo
