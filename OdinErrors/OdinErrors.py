@@ -39,7 +39,7 @@ class OdinErrors(sublime_plugin.EventListener):
             sinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
 
         return list(filter(
-            lambda x: x.startswith(view.file_name()),
+            lambda x: x.startswith(view.file_name().replace("\\", "/")),
             subprocess.Popen(
                 [shutil.which("odin"), "check", os.path.dirname(view.file_name()), "-no-entry-point"] + args,
                 stdout = subprocess.PIPE,
